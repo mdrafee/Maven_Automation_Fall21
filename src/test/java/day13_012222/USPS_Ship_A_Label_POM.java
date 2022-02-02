@@ -21,7 +21,7 @@ public class USPS_Ship_A_Label_POM extends Reusuable_Annotations {
         //click on Send tab
         BaseClass.homepage().clickOndSendTab();
 
-        //click on Ship a Label
+        //click on print a Label
         BaseClass.sendMailAndPackages().clickOnPrintLabelButton();
 
 

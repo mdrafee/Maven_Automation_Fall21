@@ -36,14 +36,14 @@ public class Reusable_Actions_Loggers_POM {
     }//end of webdriver method
 
     //method to hover on any web element
-    public static void mouseHover(WebDriver driver, String xpath, ExtentTest logger, String elementName){
+    public static void mouseHover(WebDriver driver, WebElement xpath, ExtentTest logger, String elementName){
         //declare local explicit wait
         WebDriverWait wait = new WebDriverWait(driver,15);
         System.out.println("Hovering on element " + elementName);
         logger.log(LogStatus.INFO,"Hovering on element " + elementName);
         try {
             Actions actions = new Actions(driver);
-            WebElement element = wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(xpath)));
+            WebElement element = wait.until(ExpectedConditions.visibilityOf(xpath));
             actions.moveToElement(element).perform();
         } catch (Exception e) {
             System.out.println("Unable to hover on " + elementName + " Error:" + e);
@@ -67,6 +67,19 @@ public class Reusable_Actions_Loggers_POM {
             getScreenShot(driver,elementName,logger);
         }
     }//end of click method
+    public static void clickbyIndex (WebDriver driver, WebElement xpath,int indexNnumber, ExtentTest logger,String elementName) {
+        //explicit wait
+        WebDriverWait wait = new WebDriverWait(driver,15);
+        logger.log(LogStatus.INFO,"Clicking by index " + elementName);
+        System.out.println("Clicking on element " + elementName);
+        try{
+            wait.until(ExpectedConditions.visibilityOfAllElements(xpath)).get(indexNnumber).click();
+        } catch (Exception e) {
+            System.out.println("Unable to click on element " + elementName + " --" + e);
+            logger.log(LogStatus.FAIL,"Unable to click by index on" + elementName + " Error:" + e);
+            getScreenShot(driver,elementName,logger);
+        }
+    }//end click by index
 
     //creating void submit method for any web element
     public static void submitMethod(WebDriver driver, String xpath, ExtentTest logger,String elementName){
